@@ -9,8 +9,6 @@ class KeyVault:
     client_id = os.getenv("CLIENT_ID", "")
     client_secret = os.getenv("CLIENT_SECRET", "")
 
-    print(tenant_id)
-
     credential = ClientSecretCredential(
         tenant_id=tenant_id, client_id=client_id, client_secret=client_secret
     )
@@ -21,5 +19,5 @@ class KeyVault:
         try:
             secret_value = secret_client.get_secret(secret_name)
             return secret_value.value
-        except Exception as e:
-            raise Exception(f"Error al obtener el secreto: {e}")
+        except Exception as e:  # pragma: no cover
+            raise ValueError(f"Error al obtener el secreto: {e}")
